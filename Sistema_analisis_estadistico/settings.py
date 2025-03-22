@@ -158,7 +158,7 @@ MEDIA_URL = '/media/'
 # Es una medida provisional y sería mejor utilizar una base de datos u otro sistema de almacenamiento.
 # Por alcance y tiempo de desarrollo se optó por esta solución, pues es un prototipo y no se consideró el uso de bases de datos.
 # La carpeta tampoco se limpia automáticamente, por lo que es necesario hacerlo manualmente. De no hacerlo se acumularán archivos temporales y se generan muchos.
-TEMP_FILES_DIR = BASE_DIR / 'temp_files' # Carpeta para archivos temporales 
+TEMP_FILES_DIR = '/tmp' # Carpeta para archivos temporales 
 
 
 
