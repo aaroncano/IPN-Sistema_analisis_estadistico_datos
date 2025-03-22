@@ -25,7 +25,7 @@ def cargar_archivo(request):
         if form.is_valid():
             archivo_csv = request.FILES['archivo_csv']
             unique_file_name = handle_uploaded_file(archivo_csv, request.session.session_key)
-            return redirect('file_handler:revisar_csv', file_name=unique_file_name)
+            return redirect('file_handler:revisar_csv')
     else:
         form = CargaCSVForm()
     return render(request, 'file_handler/cargar_archivo.html', {
@@ -33,20 +33,24 @@ def cargar_archivo(request):
         'mensaje_error': mensaje_error 
     })
 
-def revisar_csv(request, file_name):
-    df, error_response, file_path = leer_csv_o_error(request, file_name)
-    if error_response:
-        # Devuelve una respuesta HTTP adecuada para errores
-        return error_response
-    
-    info = request.session.get('info', None) # Obtiene el mensaje de éxito o error
-    request.session['info'] = None  # Borra el mensaje de la sesión
+def revisar_csv(request):
+    print("revisar_csv")
+    return render(request, 'file_handler/revisar_csv.html')
 
-    return render(request, 'file_handler/revisar_csv.html', {
-        'dataframe': crear_inicio_tabla(df),
-        'file_name': file_name,
-        'info': info
-    })
+# def revisar_csv(request, file_name):
+#     df, error_response, file_path = leer_csv_o_error(request, file_name)
+#     if error_response:
+#         # Devuelve una respuesta HTTP adecuada para errores
+#         return error_response
+    
+#     info = request.session.get('info', None) # Obtiene el mensaje de éxito o error
+#     request.session['info'] = None  # Borra el mensaje de la sesión
+
+#     return render(request, 'file_handler/revisar_csv.html', {
+#         'dataframe': crear_inicio_tabla(df),
+#         'file_name': file_name,
+#         'info': info
+#     })
 
 
 def descargar_archivo_csv(request, file_name):
